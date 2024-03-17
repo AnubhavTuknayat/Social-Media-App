@@ -8,7 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import {fileURLToPath} from "url";
-// import {register} from "./contollers/auth.js";
+import {register} from "./contollers/auth.js";
 
 // CONFIGS:
 const filename = fileURLToPath(import.meta.url)
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 // ROUTES
-// app.post("/auth/register",upload.single("picture"),register);
+app.post("/auth/register",upload.single("picture"),register);
 
 // MONGOOSE SETUP:
 const PORT = process.env.PORT || 8000;
