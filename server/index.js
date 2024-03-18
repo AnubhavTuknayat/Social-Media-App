@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import {fileURLToPath} from "url";
+import axios from 'axios';
 import {register} from "./contollers/auth.js";
 
 // CONFIGS:
