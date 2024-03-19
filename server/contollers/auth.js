@@ -16,6 +16,7 @@ export const register = async (request,response)=>{
             location,
             occupation
         } = request.body;
+        console.log("PASSWORD: " , password);
 
         const salt = await bcrypt.genSalt();
         const hashPassword = await bcrypt.hash(password,salt)
@@ -24,7 +25,7 @@ export const register = async (request,response)=>{
             firstName,
             lastName,
             email,
-            hashPassword,
+            password:hashPassword,
             picturePath,
             friends,
             location,
@@ -37,6 +38,36 @@ export const register = async (request,response)=>{
         return response.status(201).json(savedUser);
 
     } catch (err) {
-        return response.status(400).json({ error : err.message });
+        console.error("Error registering user:", err);
+        return response.status(500).json({ error : err.message });
+    }
+}
+
+// LOGGING IN:
+export const login = async (request,response) =>{
+    try {
+        const {email,password} = request.body;
+
+        //Check Email:
+        const foundUser = await User.findOne({email:email});
+
+        if(!foundUser){
+            return response.status(400).json({message:"User does not exist!"})
+        }
+
+        // Check Password:
+        const passwordMatch = await bcrypt.compare(password,foundUser.password);
+
+        if(!passwordMatch){
+            return response.status(400).json({message:"Incorrect Password!"})
+        }
+
+        const token = jwt.sign({id:User._id},process.env.JWT_Secret);
+        delete foundUser.password;
+
+        return response.status(200).json({token,foundUser})
+
+    } catch (err) {
+        return response.status(500).json({error:err.message})
     }
 }

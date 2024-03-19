@@ -10,6 +10,7 @@ import path from "path";
 import {fileURLToPath} from "url";
 import axios from 'axios';
 import {register} from "./contollers/auth.js";
+import authRoutes from "./routes/auth.js"
 
 // CONFIGS:
 const filename = fileURLToPath(import.meta.url)
@@ -40,12 +41,36 @@ const upload = multer({storage});
 // ROUTES
 app.post("/auth/register",upload.single("picture"),register);
 
+app.use("/auth",authRoutes);
+
 // MONGOOSE SETUP:
 const PORT = process.env.PORT || 8000;
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(()=>{
-    app.listen(PORT, ()=> console.log(`Server Port: ${PORT}`));
+    app.listen(PORT, ()=> {
+        console.log(`Server Port: ${PORT}`)
+
+    // Testing Register:
+        // const dummyObject = {
+        //     firstName: "John",
+        //     lastName: "Doe",
+        //     email: "john.doe@example.com",
+        //     password: "password123",
+        //     picturePath: "./pubic/assets/p1.jpeg",
+        //     friends: ["Friend1", "Friend2"],
+        //     location: "New York",
+        //     occupation: "Developer"
+        // };
+        
+        // axios.post('http://localhost:3001/auth/register', dummyObject)
+        //     .then(response => {
+        //         console.log('Registration successful:', response.data);
+        //     })
+        //     .catch(err => {
+        //         console.error('Registration failed' + err.message);
+        //     });
+    });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
 
