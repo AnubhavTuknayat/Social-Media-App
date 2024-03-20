@@ -3,6 +3,7 @@ import User from "../models/user.js";
 // Get User:
 export const getUser = async (request,response) => {
     try {
+        console.log("Code reached here getuser")
         const {id} = request.params;
         const user = await User.findById(id);
 
@@ -44,11 +45,12 @@ export const getUserFriends = async (request,response) => {
 // Update Friends
 export const addRemoveFriend = async (request,response) => {
     try {
-        console.log("Code reached here no way")
+        console.log("Code reached here addremovefriend")
         const {id,friendId} = request.params;
         const user = await User.findById(id);
 
         const friend = await User.findById(friendId)
+        console.log("FRIEND: ", friend)
 
         if(user.friends.includes(friendId)){
             user.friends = user.friends.filter((id)=>{

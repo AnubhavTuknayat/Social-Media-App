@@ -74,6 +74,27 @@ mongoose.connect(process.env.MONGO_URL, {
         //     .catch(err => {
         //         console.error('Registration failed' + err.message);
         //     });
+        
+    // Testing addRemoveFriend:
+        // const userId = '65f9e084f50d2a63b5364db8';
+        // const friendId = '65f9e084f50d2a63b5364db8';
+        // const authToken = '4NU&H@V.TU%N4/@T.ATUK';
+
+        // axios.patch(`http://localhost:3001/users/${userId}/${friendId}`,
+        //     {
+        //         method: "PATCH",
+        //         headers: {
+        //         "Authorization": `Bearer ${authToken}`,
+        //         "Content-Type": "application/json",
+        //         },
+        //     }
+        // )
+        // .then(response => {
+        //     console.log('Friend list updated successfully:', response.data);
+        // })
+        // .catch(err => {
+        //     console.error('Failed to update friend list:', err.message);
+        // });
 
     });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
