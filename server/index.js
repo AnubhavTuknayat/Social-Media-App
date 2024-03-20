@@ -74,21 +74,6 @@ mongoose.connect(process.env.MONGO_URL, {
         //     .catch(err => {
         //         console.error('Registration failed' + err.message);
         //     });
-        
-        const userId = '65f9e084f50d2a63b5364db8';
-        const authToken = '4NU&H@V.TU%N4/@T.ATUK';
-
-        axios.patch(`http://localhost:3001/users/getUser`,{
-        headers: {
-            'Authorization': `Bearer ${authToken}`
-        }
-        })
-        .then(response => {
-            console.log('Success', response.data);
-        })
-        .catch(err => {
-            console.error('Failure', err);
-        });
 
     });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
