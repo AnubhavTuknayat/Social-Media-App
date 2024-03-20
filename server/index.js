@@ -9,8 +9,10 @@ import morgan from "morgan";
 import path from "path";
 import {fileURLToPath} from "url";
 import axios from 'axios';
-import {register} from "./contollers/auth.js";
-import authRoutes from "./routes/auth.js"
+import {register} from "./controllers/auth.js";
+import router from "./routes/auth.js"
+import userRouter from "./routes/users.js"
+import {verifyToken} from "./middleware/verify.js"
 
 // CONFIGS:
 const filename = fileURLToPath(import.meta.url)
@@ -41,7 +43,8 @@ const upload = multer({storage});
 // ROUTES
 app.post("/auth/register",upload.single("picture"),register);
 
-app.use("/auth",authRoutes);
+app.use("/auth",router);
+app.use("/users",userRouter)
 
 // MONGOOSE SETUP:
 const PORT = process.env.PORT || 8000;
@@ -71,6 +74,22 @@ mongoose.connect(process.env.MONGO_URL, {
         //     .catch(err => {
         //         console.error('Registration failed' + err.message);
         //     });
+        
+        const userId = '65f9e084f50d2a63b5364db8';
+        const authToken = '4NU&H@V.TU%N4/@T.ATUK';
+
+        axios.patch(`http://localhost:3001/users/getUser`,{
+        headers: {
+            'Authorization': `Bearer ${authToken}`
+        }
+        })
+        .then(response => {
+            console.log('Success', response.data);
+        })
+        .catch(err => {
+            console.error('Failure', err);
+        });
+
     });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
 
