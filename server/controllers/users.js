@@ -3,12 +3,12 @@ import User from "../models/user.js";
 // Get User:
 export const getUser = async (request,response) => {
     try {
-        console.log("Code reached here getuser")
+        console.log("@@")
         const {id} = request.params;
         const user = await User.findById(id);
-
+        console.log("@@2")
         if(!user)return response.status(404).json({message:"User not found!"})
-
+        console.log("@@3")
         return response.status(200).json(user)
 
     } catch (err) {
@@ -65,7 +65,7 @@ export const addRemoveFriend = async (request,response) => {
             user.friends.push(friendId);
             friend.friends.push(id);
         }
-        
+
         await user.save();
         await friend.save();
 
@@ -75,11 +75,13 @@ export const addRemoveFriend = async (request,response) => {
             })
         );
 
+
         const formattedFriends = friends.map(
             ({_id,firstName,lastName,occupation,location}) =>{
                 return {_id,firstName,lastName,occupation,location}
             }
         );
+
     
         return response.status(200).json(formattedFriends); 
 
