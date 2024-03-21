@@ -56,23 +56,7 @@ mongoose.connect(process.env.MONGO_URL, {
         console.log(`Server Port: ${PORT}`)
 
         //TESTS:
-        const userId = '65f9e084f50d2a63b5364db8';
-        const authToken = process.env.JWT_Secret;
-
-        axios.get(`http://localhost:3001/users/${userId}`,
-            {
-                method: "GET",
-                headers: {
-                "Authorization": `Bearer ${authToken}`,
-                },
-            }
-        )
-        .then(response => {
-            console.log('User retreived', response.data);
-        })
-        .catch(err => {
-            console.error('User not retreived', err.message);
-        });
+        
     });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
 
