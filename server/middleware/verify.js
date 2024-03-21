@@ -4,14 +4,14 @@ export const verifyToken = async (request,response,next)=>{
     try {
         let token = request.header("Authorization");
         console.log("Code reached here" , token)
-        // if(!token){
-        //     return response.status(500).send("Access Denied!")
-        // }
+        if(!token){
+            return response.status(500).send("Access Denied!")
+        }
 
-        // if(token.startsWith("Bearer ")){
-        //     token = token.split(' ')[1];
-        // }
-
+        if(token.startsWith("Bearer ")){
+            token = token.split(' ')[1];
+        }
+        console.log("TOKEN:", token);
         // const verified = jwt.verify(token, process.env.JWT_SECRET);
         // req.user = verified;
         

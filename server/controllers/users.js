@@ -3,12 +3,12 @@ import User from "../models/user.js";
 // Get User:
 export const getUser = async (request,response) => {
     try {
-        console.log("@@")
+
         const {id} = request.params;
         const user = await User.findById(id);
-        console.log("@@2")
+
         if(!user)return response.status(404).json({message:"User not found!"})
-        console.log("@@3")
+
         return response.status(200).json(user)
 
     } catch (err) {
