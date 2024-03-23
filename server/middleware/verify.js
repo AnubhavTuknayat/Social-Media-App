@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export const verifyToken = async (request,response,next)=>{
     try {
         let token = request.header("Authorization");
-        console.log("Code reached here" , token)
+        // console.log("Code reached here" , token)
         if(!token){
             return response.status(500).send("Access Denied!")
         }

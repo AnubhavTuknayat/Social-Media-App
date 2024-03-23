@@ -10,8 +10,10 @@ import path from "path";
 import {fileURLToPath} from "url";
 import axios from 'axios';
 import {register} from "./controllers/auth.js";
+import {createPost} from "./controllers/posts.js";
 import router from "./routes/auth.js"
 import userRouter from "./routes/users.js"
+import postRouter from "./routes/posts.js"
 import {verifyToken} from "./middleware/verify.js"
 
 // CONFIGS:
@@ -40,11 +42,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-// ROUTES
+// ROUTES WITH FILES
 app.post("/auth/register",upload.single("picture"),register);
+app.post("/posts/",verifyToken,upload.single("picture"),createPost);
 
+// ROUTES
 app.use("/auth",router);
 app.use("/users",userRouter)
+app.use("/posts",postRouter)
 
 // MONGOOSE SETUP:
 const PORT = process.env.PORT || 8000;

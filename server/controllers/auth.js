@@ -16,7 +16,7 @@ export const register = async (request,response)=>{
             location,
             occupation
         } = request.body;
-        console.log("PASSWORD: " , password);
+        // console.log("PASSWORD: " , password);
 
         const salt = await bcrypt.genSalt();
         const hashPassword = await bcrypt.hash(password,salt)
