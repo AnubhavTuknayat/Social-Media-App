@@ -55,9 +55,39 @@ export const getUserPosts = async (request,response) => {
         // const userPosts = allPosts.filter((post)=>{
         //     return post.userId === userId
         // })
-        const userPosts = await Post.find({userId})
+        const userPosts = await Post.find({userId:userId})
 
         return response.status(200).json(userPosts);
+
+    } catch (err) {
+        return response.status(409).json({error:err.message})
+    }
+}
+
+// UPDATE
+export const likePost = async (request,response) => {
+    try {
+        console.log("POSTSSS")
+        const {id} = request.params;
+        const {userId} = request.body;
+
+        const post = await Post.findById(id)
+        const isLiked = post.likes.get(userId); //Check if already liked
+
+        if(isLiked){
+            post.likes.delete(userId);
+        }
+        else{
+            post.likes.set(userId,true);
+        }
+
+        const updatedPost = await Post.findByIdAndUpdate(
+            id,
+            {likes:post.likes},
+            {new:true} // returns updated document, rather than original
+        );
+
+        return response.status(200).json(updatedPost);
 
     } catch (err) {
         return response.status(409).json({error:err.message})

@@ -15,6 +15,9 @@ import router from "./routes/auth.js"
 import userRouter from "./routes/users.js"
 import postRouter from "./routes/posts.js"
 import {verifyToken} from "./middleware/verify.js"
+import User from "./models/user.js";
+import Post from "./models/post.js";
+import {users,posts} from "./data/dummy.js"
 
 // CONFIGS:
 const filename = fileURLToPath(import.meta.url)
@@ -60,7 +63,9 @@ mongoose.connect(process.env.MONGO_URL, {
     app.listen(PORT, ()=> {
         console.log(`Server Port: ${PORT}`)
 
-        //TESTS:
+        //Add dummy data once
+        // User.insertMany(users);
+        // Post.insertMany(posts);
         
     });
 }).catch((error)=> console.log(`Did not connect: ${error}`));
