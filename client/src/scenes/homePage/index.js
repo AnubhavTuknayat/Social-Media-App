@@ -1,9 +1,12 @@
 import Navbar from "scenes/navbar/index.js";
+import { Box } from "@mui/system";
 
 const HomePage = () => {
     return(
         <>
-            <Navbar></Navbar>
+            <Box>
+                <Navbar />
+            </Box>
         </>
     )
 };
