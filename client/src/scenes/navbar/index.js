@@ -36,9 +36,9 @@ const Navbar = () => {
     const neutralLight = theme.palette.neutral.light;
     const dark = theme.palette.neutral.dark;
     const background = theme.palette.background.default;
-    const primaryLight = theme.palette.primary.light;
+    // const primaryLight = theme.palette.primary.light;
     const alt = theme.palette.background.alt;
-    const fullName = user===null?`Full Name`:`${user.firstName} ${user.lastName}`;
+    const fullName = (user===undefined||user===null)?`Full Name`:`${user.firstName} ${user.lastName}`;
 
     const goToHome = () =>{
         navigate("/home");
@@ -48,6 +48,7 @@ const Navbar = () => {
     }
     const handleLogout = ()=> {
         dispatch(setLogout());
+        navigate("/")
     }
     const handleMobileMenu = ()=>{
         setMobileMenuToggled(!isMobileMenuToggled)
