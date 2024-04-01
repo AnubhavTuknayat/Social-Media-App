@@ -243,15 +243,22 @@ const Form = ()=>{
                     </Box>
 
                     {/* BUTTONS */}
-                    <Box>
+                    <Box
+                    sx={{
+                        display:"flex",
+                        flexDirection:"column",
+                        alignItems:"center",
+                    }}
+                    >
                         {isLogin?(
                             <>
                                 <Button
                                 fullWidth
                                 type="submit"
                                 sx={{
-                                    m:"1rem",
+                                    m:"1rem auto",
                                     p:"1rem",
+                                    width:"50%",
                                     backgroundColor:palette.primary.main,
                                     color:palette.background.alt,
                                     "&:hover":{
@@ -268,6 +275,7 @@ const Form = ()=>{
                                     sx={{
                                         color:palette.background.primary,
                                         textDecoration:"underline",
+                                        alignSelf:"start",
                                         "&:hover":{
                                             color:palette.primary.main,
                                             cursor:"pointer"
@@ -286,8 +294,9 @@ const Form = ()=>{
                                 fullWidth
                                 type="submit"
                                 sx={{
-                                    m:"1rem",
+                                    m:"1rem auto",
                                     p:"1rem",
+                                    width:"50%",
                                     backgroundColor:palette.primary.main,
                                     color:palette.background.alt,
                                     "&:hover":{
@@ -303,6 +312,7 @@ const Form = ()=>{
                                     sx={{
                                         color:palette.background.primary,
                                         textDecoration:"underline",
+                                        alignSelf:"start",
                                         "&:hover":{
                                             color:palette.primary.main,
                                             cursor:"pointer"

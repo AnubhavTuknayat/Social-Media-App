@@ -26,7 +26,7 @@ const LoginPage = () => {
                 </Typography>
             </Box>
 
-            <Box width={isNonMobileScreens?"50%":"90%"} p="1rem" m="1rem auto" borderRadius="2rem" backgroundColor={theme.palette.background.alt}>
+            <Box width={isNonMobileScreens?"40%":"90%"} p="1rem" m="1rem auto" borderRadius="2rem" backgroundColor={theme.palette.background.alt}>
                 <Typography 
                     fontWeight="500"
                     variant="h5"
