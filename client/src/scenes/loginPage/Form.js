@@ -63,8 +63,9 @@ const Form = ()=>{
     }
 
     const register = async (values,onSubmitProps) => {
+        console.log(values)
         const formData = new FormData();
-        console.log(formData)
+        // console.log(formData)
         for(let value in values){
             formData.append(value,values[value]);
         }
@@ -87,12 +88,21 @@ const Form = ()=>{
     };
 
     const login = async (values, onSubmitProps) => {
-        console.log(JSON.stringify(values))
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
+        // console.log(values)
+        // const formData = new FormData();
+        // console.log(formData)
+        // for(let value in values){
+        //     formData.append(value,values[value]);
+        // }
+        // console.log(formData.get("email"))
+        const loggedInResponse = await fetch(
+            "http://localhost:3001/auth/login", 
+            {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(values),
+            }
+        );
         console.log("RESPONSE: ",loggedInResponse)
         const loggedIn = await loggedInResponse.json();
         console.log("RES: ",loggedIn)

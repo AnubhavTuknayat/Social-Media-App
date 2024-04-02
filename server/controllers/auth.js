@@ -47,9 +47,9 @@ export const register = async (request,response)=>{
 export const login = async (request,response) =>{
     try {
         console.log("HERE")
+        console.log("email: ",request.body)
         const {email,password} = request.body;
-        // console.log("email: ",email)
-        // console.log("password: ",password)
+
         //Check Email:
         const foundUser = await User.findOne({email:email});
 
@@ -70,6 +70,7 @@ export const login = async (request,response) =>{
         return response.status(200).json({token,foundUser})
 
     } catch (err) {
+        // console.log(request)
         return response.status(500).json({error:err.message})
     }
 }
