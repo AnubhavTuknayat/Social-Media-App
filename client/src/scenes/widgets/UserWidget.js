@@ -5,6 +5,8 @@ import {
     WorkOutlineOutlined,
 } from "@mui/icons-material"
 
+import TwitterIcon from "@mui/icons-material/Twitter"
+import LinkedinIcon from "@mui/icons-material/LinkedIn"
 import {Box,Typography,Divider,useTheme} from "@mui/material"
 import UserImage from "components/UserImage.js"
 import FlexBetween from "components/FlexBetween"
@@ -36,6 +38,10 @@ const UserWidget = ({userId,picturePath}) =>{
         setUser(data);
     }
 
+    const goToProfile = ()=>{
+        navigate(`/profile/${userId}`)
+    }
+
     useEffect(()=>{
         console.log("USER: ",userId)
         getUser();
@@ -58,35 +64,116 @@ const UserWidget = ({userId,picturePath}) =>{
     return (
         <>
             <WidgetWrapper sx={{
-                color:"white",
-                m:"2rem",
-                width:"21%"
+                color:dark,
+                // m:"2rem",
+                width:"100%"
             }}>
-                <FlexBetween>
+
+                {/* First segment */}
+                <FlexBetween
+                    gap="0.5rem"
+                    pb="1rem"
+                >
                     <FlexBetween sx={{
                         gap:"1.3rem"
                     }}>
-                        <UserImage image={user.picturePath} />
-                        <FlexBetween sx={{
-                            flexDirection:"column",
-                            gap:"1rem",
-                            alignItems:"flex-start"
-                        }}>
-                            <Typography sx={{
-                                fontSize:"1.2rem"
-                            }}>
+                        <UserImage image={picturePath} />
+                        <Box>
+                            <Typography
+                                variant="h4"
+                                color={dark}
+                                fontWeight="500"
+                                sx={{
+                                    "&:hover":{
+                                        color:medium,
+                                        cursor:"pointer"
+                                    }
+                                }}
+                                onClick={()=>goToProfile()}
+                            >
                                 {fullName}
                             </Typography>
-                            <Typography>
+                            <Typography color={medium}>
                                 {friends.length} {friends.length===1?`Friend`:`Friends`}
                             </Typography>
-                        </FlexBetween>
+                        </Box>
                     </FlexBetween>
                     <FlexBetween>
                             <ManageAccountsOutlined />
                     </FlexBetween>
                 </FlexBetween>
-                
+                <Divider/>
+
+                {/* Second segment */}
+                <Box p="1rem 0">
+                    <Box display="flex" alignItems="center" gap="1rem" mb="1rem">
+                        <LocationOnOutlined fontSize="large" sx={{color:main}} />
+                        <Typography color={medium}>
+                            {location}
+                        </Typography>
+                    </Box>
+                    <Box display="flex" alignItems="center" gap="1rem">
+                        <WorkOutlineOutlined fontSize="large" sx={{color:main}} />
+                        <Typography color={medium}>
+                            {occupation}
+                        </Typography>
+                    </Box>
+                </Box>
+                <Divider/>
+                {/* Third segment */}
+                <Box p="1rem 0">
+                    <FlexBetween mb="0.5rem">
+                        <Typography color={medium}>
+                            Number of profile views
+                        </Typography>
+                        <Typography color={main} fontWeight="500">
+                            {views}
+                        </Typography>
+                    </FlexBetween>
+                    <FlexBetween mb="0.5rem">
+                        <Typography color={medium}>
+                            Number of post impressions
+                        </Typography>
+                        <Typography color={main} fontWeight="500">
+                            {impressions}
+                        </Typography>
+                    </FlexBetween>
+                </Box>
+                <Divider/>
+                {/* Fourth segment */}
+                <Box p="1rem 0">
+                    <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
+                        Social Profiles
+                    </Typography>
+                    <FlexBetween mb="0.5rem" gap="0.5rem">
+                        <FlexBetween gap="1rem">
+                            <TwitterIcon sx={{height:"2.3rem",width:"2.3rem"}} />
+                            <Box>
+                                <Typography color={main} fontWeight="500">
+                                    Twitter
+                                </Typography>
+                                <Typography color={medium}>
+                                    Social Network
+                                </Typography>
+                            </Box>
+                        </FlexBetween>
+                        <EditOutlined sx={{color:{main}}}/>
+                    </FlexBetween>
+                    <FlexBetween mb="0.5rem" gap="0.5rem">
+                        <FlexBetween gap="1rem">
+                            <LinkedinIcon sx={{height:"2.3rem",width:"2.3rem"}} />
+                            <Box>
+                                <Typography color={main} fontWeight="500">
+                                    Linkedin
+                                </Typography>
+                                <Typography color={medium}>
+                                    Network Platform
+                                </Typography>
+                            </Box>
+                        </FlexBetween>
+                        <EditOutlined sx={{color:{main}}} />
+                    </FlexBetween>
+                </Box>
             </WidgetWrapper>
         </>
     )
