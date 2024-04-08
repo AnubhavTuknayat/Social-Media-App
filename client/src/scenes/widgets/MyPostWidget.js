@@ -32,7 +32,7 @@ const MyPostWidget = ({picturePath}) => {
     const dispatch = useDispatch();
     const [isImage,setIsImage] = useState(false)
     const [image,setImage] = useState(null)
-    const [post,setPost] = useState("")
+    const [caption,setCaption] = useState("")
     const {palette} = useTheme();
     const user = useSelector((state)=>state.user)
     const token = useSelector((state)=>state.token)
@@ -43,7 +43,7 @@ const MyPostWidget = ({picturePath}) => {
     const handlePost = async () => {
         const formData = new FormData()
         formData.append("userId",user._id)
-        formData.append("caption",post)
+        formData.append("caption",caption)
         
         if(image){
             formData.append("picture",image)
@@ -61,7 +61,7 @@ const MyPostWidget = ({picturePath}) => {
         const posts = await response.json();
         dispatch(setPosts({posts}));
         setImage(null)
-        setPost("")
+        setCaption("")
     };
 
     return(
@@ -71,8 +71,8 @@ const MyPostWidget = ({picturePath}) => {
                 <UserImage image={picturePath} />
                 <InputBase 
                 placeholder="Add caption"
-                onChange={(e)=>setPost(e.target.value)}
-                value={post}
+                onChange={(e)=>setCaption(e.target.value)}
+                value={caption}
                 sx={{
                     width:"100%",
                     backgroundColor:palette.neutral.light,
@@ -174,7 +174,7 @@ const MyPostWidget = ({picturePath}) => {
                 }
 
                 <Button 
-                disabled={!post}
+                disabled={!caption}
                 onClick={handlePost}
                 sx={{
                     color:palette.background.alt,
