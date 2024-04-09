@@ -32,7 +32,7 @@ const FeedWidget = ({userId,isProfile=false}) => {
 return(
     <>
         {posts.map((post)=>{
-            <PostWidget key={post._id} post={post} />
+            return <PostWidget key={post._id} post={post} />
         })}
     </>
 )

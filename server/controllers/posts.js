@@ -67,25 +67,29 @@ export const getUserPosts = async (request,response) => {
 // UPDATE
 export const likePost = async (request,response) => {
     try {
-        console.log("POSTSSS")
+        console.log("Here")
         const {id} = request.params;
         const {userId} = request.body;
 
         const post = await Post.findById(id)
         const isLiked = post.likes.get(userId); //Check if already liked
-
-        if(isLiked){
-            post.likes.delete(userId);
-        }
-        else{
+        console.log(post)
+        console.log(isLiked)
+        if(isLiked===undefined){
             post.likes.set(userId,true);
         }
+        else{
+            post.likes.delete(userId);
+        }
+
+        console.log(post)
 
         const updatedPost = await Post.findByIdAndUpdate(
             id,
             {likes:post.likes},
             {new:true} // returns updated document, rather than original
         );
+        console.log(updatedPost)
 
         return response.status(200).json(updatedPost);
 

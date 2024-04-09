@@ -19,7 +19,7 @@ const PostWidget = ({post}) => {
     const token = useSelector((state)=>state.token)
     const loggedInUserId = useSelector((state)=>state.user._id)
     const isLiked = Boolean(post.likes[loggedInUserId]);
-    const likeCount = Object.keys(post.likes).length();
+    const likeCount = Object.keys(post.likes).length;
 
     const {palette} = useTheme();
     const main = palette.neutral.main;
@@ -39,11 +39,12 @@ const PostWidget = ({post}) => {
             }
         )
         const updatedPost = await response.json();
+        console.log(updatedPost)
         dispatch(setPost({post:updatedPost}))
     }
 
     useEffect(()=>{
-        console.log("HERE:" , post);
+        // console.log(post._id)
     })
 
     return(
@@ -58,6 +59,29 @@ const PostWidget = ({post}) => {
             <Typography color={main} sx={{mt:"1rem"}}>
                 {post.caption}
             </Typography>
+            {post.picturePath&&(
+                <img
+                width="100%"
+                height="100%"
+                alt="post"
+                style={{borderRadius:"0.75rem",marginTop:"0.25rem"}}
+                src={`http://localhost:3001/assets/${post.picturePath}`}
+                />
+            )}
+            <FlexBetween mt="0.25rem">
+                <FlexBetween gap="1rem">
+                    <FlexBetween gap="0.1rem">
+                        <IconButton onClick={()=>handleLike()}>
+                            {!isLiked?(
+                            <FavoriteOutlined />
+                            ):(
+                            <FavoriteOutlined sx={{color:"red"}}/>
+                            )}
+                        </IconButton>
+                        <Typography>{likeCount}</Typography>
+                    </FlexBetween>
+                </FlexBetween>
+            </FlexBetween>
         </WidgetWrapper>
         </>
     )
