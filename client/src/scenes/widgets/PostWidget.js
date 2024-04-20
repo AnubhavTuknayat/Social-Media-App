@@ -20,6 +20,7 @@ const PostWidget = ({post}) => {
     const loggedInUserId = useSelector((state)=>state.user._id)
     const isLiked = Boolean(post.likes[loggedInUserId]);
     const likeCount = Object.keys(post.likes).length;
+    const name = `${post.firstName} ${post.lastName}`
 
     const {palette} = useTheme();
     const main = palette.neutral.main;
@@ -80,8 +81,30 @@ const PostWidget = ({post}) => {
                         </IconButton>
                         <Typography>{likeCount}</Typography>
                     </FlexBetween>
+                    <FlexBetween gap="0.1rem">
+                        <IconButton onClick={()=>setIsComments(!isComments)}>
+                            <ChatBubbleOutlineOutlined />
+                        </IconButton>
+                        <Typography>{post.comments.length}</Typography>
+                    </FlexBetween>
                 </FlexBetween>
+                <IconButton>
+                    <ShareOutlined />
+                </IconButton>
             </FlexBetween>
+            {isComments && (
+                <Box mt="0.5rem">
+                    {post.comments.map((comment,i)=>(
+                        <Box key={`${name} ${i}`}>
+                            <Divider />
+                            <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
+                                {comment}
+                            </Typography>
+                        </Box>
+                    ))}
+                    <Divider />
+                </Box>
+            )}
         </WidgetWrapper>
         </>
     )

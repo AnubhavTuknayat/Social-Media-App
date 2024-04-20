@@ -7,7 +7,6 @@ const FeedWidget = ({userId,isProfile=false}) => {
     const dispatch = useDispatch();
     const posts = useSelector((state)=>state.posts)
     const token = useSelector((state)=>state.token)
-    const [user,setUser] = useState(null)
     
 
     const getFeed = async () => {
@@ -26,8 +25,10 @@ const FeedWidget = ({userId,isProfile=false}) => {
     }
 
     useEffect(()=>{
+        // console.log("POSTS: " , posts)
         getFeed();
-    },[]) // eslint-disable-next-line react-hooks/exhaustive-deps
+        // console.log("POSTS: " , posts)
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
 return(
     <>

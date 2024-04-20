@@ -5,6 +5,8 @@ import { UseSelector, useSelector } from "react-redux";
 import { useMediaQuery } from "@mui/material";
 import MyPostWidget from "scenes/widgets/MyPostWidget"
 import FeedWidget from "scenes/widgets/FeedWidget";
+import AdWidget from "scenes/widgets/adWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
 
 const HomePage = () => {
     
@@ -30,11 +32,13 @@ const HomePage = () => {
                     mt={isNonMobileScreens?undefined:"2rem"}
                     >
                         <MyPostWidget picturePath={user.picturePath} />
-                        <FeedWidget userId={user._id} isProfile={false}/>
+                        <FeedWidget userId={user._id}/>
                     </Box>
                     {isNonMobileScreens&&(
                         <Box flexBasis="26%">
-                            
+                            <AdWidget />
+                            <Box m="2rem 0" />
+                            <FriendListWidget userId = {user._id}/>
                         </Box>
                     )}
                 </Box>
