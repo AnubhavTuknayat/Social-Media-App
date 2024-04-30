@@ -60,7 +60,7 @@ mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(()=>{
-    app.listen(PORT, ()=> {
+    app.listen(PORT, '0.0.0.0', ()=> {
         console.log(`Server Port: ${PORT}`)
 
         //Add dummy data once
